@@ -1,16 +1,17 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
+require("dotenv").config({ path: "../.env" });
 
 const schema = require("./schema/schema");
 
 const app = express();
 
 // DB COnnection
-mongoose.connect(
-  "mongodb+srv://yesha2406:yesha2406@cluster0.jegjw.mongodb.net/gql-ninja?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 mongoose.connection.once("open", () => {
   console.log("Connected to Database.");
 });
