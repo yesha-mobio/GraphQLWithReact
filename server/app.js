@@ -1,11 +1,15 @@
+require("dotenv").config({ path: "./.env" });
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "./.env" });
+const cors = require("cors");
 
 const schema = require("./schema/schema");
 
 const app = express();
+
+// Allow cross origin request
+app.use(cors());
 
 // DB Connection
 mongoose.connect(process.env.DATABASE, {
